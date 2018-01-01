@@ -325,9 +325,13 @@ class OpenID(object):
             return app
 
     :param app: the application to register this openid controller with.
+    :param stateless: if True, the app will run OpenID in stateless mode.
+                      This will is discard the need for initially storing
+                      state at the start of the request. Overrides the
+                      fs_store_path configured.
     :param fs_store_path: if given this is the name of a folder where the
                           OpenID auth process can store temporary
-                          information.  If neither is provided a temporary
+                          information.  If nothing is provided a temporary
                           folder is assumed.  This is overridden by the
                           ``OPENID_FS_STORE_PATH`` configuration key.
     :param store_factory: alternatively a function that creates a
@@ -342,8 +346,8 @@ class OpenID(object):
     :param url_root_as_trust_root: whether to use the url_root as trust_root
     """
 
-    def __init__(self, app=None, fs_store_path=None, store_factory=None,
-                 fallback_endpoint=None, extension_responses=None,
+    def __init__(self, app=None, stateless=False, fs_store_path=None,
+                 store_factory=None, fallback_endpoint=None, extension_responses=None,
                  safe_roots=None, url_root_as_trust_root=False):
         # backwards compatibility support
         if isstring(app):
@@ -362,7 +366,7 @@ class OpenID(object):
             self.init_app(app)
 
         self.fs_store_path = fs_store_path
-        if store_factory is None:
+        if not stateless:
             store_factory = self._default_store_factory
         self.store_factory = store_factory
         self.after_login_func = None
