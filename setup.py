@@ -34,13 +34,12 @@ else:
     install_requires = ['Flask>=0.3', 'python-openid>=2.0']
 
 setup(
-    name='Flask-OpenID',
+    name='Flask-OpenID-Stateless',
     version='1.2.5',
-    url='http://github.com/mitsuhiko/flask-openid/',
+    url='http://github.com/canonical-webteam/flask-openid/',
     license='BSD',
-    author='Armin Ronacher, Patrick Uiterwijk',
-    author_email='armin.ronacher@active-4.com, puiterwijk@redhat.com',
-    description='OpenID support for Flask',
+    author='Canonical Web Team',
+    description='OpenID support for Flask, forked to make the library stateless.',
     long_description=__doc__,
     py_modules=['flask_openid'],
     zip_safe=False,
