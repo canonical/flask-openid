@@ -502,7 +502,7 @@ class OpenID(object):
         def decorated(*args, **kwargs):
             if request.args.get('openid_complete') != u'yes':
                 return f(*args, **kwargs)
-            consumer = Consumer(SessionWrapper(self), self.store_factory())
+            consumer = Consumer(SessionWrapper(self), self.store_factory)
             args = request.args.to_dict()
             args.update(request.form.to_dict())
             openid_response = consumer.complete(args, self.get_current_url())
@@ -561,7 +561,7 @@ class OpenID(object):
                     if key not in ALL_KEYS:
                         raise ValueError('invalid optional key %r' % key)
         try:
-            consumer = Consumer(SessionWrapper(self), self.store_factory())
+            consumer = Consumer(SessionWrapper(self), self.store_factory)
             auth_request = consumer.begin(identity_url)
             if ask_for or ask_for_optional:
                 self.attach_reg_info(auth_request, ask_for, ask_for_optional)
