@@ -35,7 +35,7 @@ else:
 
 setup(
     name='Flask-OpenID-Stateless',
-    version='1.2.5',
+    version='1.2.6',
     url='http://github.com/canonical-webteam/flask-openid/',
     license='BSD',
     author='Canonical Web Team',
